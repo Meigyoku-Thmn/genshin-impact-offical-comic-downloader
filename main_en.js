@@ -1,5 +1,5 @@
 require("./core")(
-   "https://genshin.mihoyo.com/vi/manga",
-   "vi",
-   "Truyện tranh Genshin Impact"
+   "https://genshin.mihoyo.com/en/manga",
+   "en",
+   "Truyện tranh Genshin Impact (Tiếng Anh)"
 );

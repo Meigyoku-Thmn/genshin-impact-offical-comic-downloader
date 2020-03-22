@@ -6,22 +6,23 @@ const retry = require('@beyonk/promise-retry');
 
 // https://futurestud.io/tutorials/download-files-images-with-axios-in-node-js
 async function downloadImage(url, path) {
-   const writer = fs.createWriteStream(path)
+   const writer = fs.createWriteStream(path);
    const response = await axios({
       url,
       method: 'GET',
-      responseType: 'stream'
-   })
+      responseType: 'stream',
+   });
    response.data.pipe(writer)
    return new Promise((resolve, reject) => {
-      writer.on('finish', resolve)
-      writer.on('error', reject)
-   })
+      writer.on('finish', resolve);
+      writer.on('error', reject);
+   });
 }
 
-; module.exports = (async function (url, lang, rootDirPath) {
+module.exports = (async function (url, lang, rootDirPath) {
+   rootDirPath = path.join("output", rootDirPath);
    let response = await axios.get(url);
-   let $ = cheerio.load(response.data)
+   let $ = cheerio.load(response.data);
    let scriptStr = $('body > script')[0].children[0].data;
    let window = {};
    eval(scriptStr);
@@ -33,13 +34,17 @@ async function downloadImage(url, path) {
       console.log(`\n=======\nChương ${i}:`);
       let chapter = chapters[i];
       if (i == 0) {
-         if (lang == "zh-Hans")
-            var title = "第〇话 " + chapter.title;
-         else if (lang == "vi")
-            var title = "Chương 00: " + chapter.title;
+         var title; (({
+            "zh-Hans": () => title = "第〇话 " + chapter.title,
+            "vi": () => title = "Chương 00: " + chapter.title,
+            "en": () => title = "Chapter 00: " + chapter.title,
+         })[lang] || (() => { }))();
+         if (title == null)
+            throw new Error(`lang "${lang}" is unknown.`);
       }
       else title = chapter.title;
-      if (title == null) continue;
+      if (title == null)
+         continue;
       title = title.replace(/:/g, '∶').trim();
       let metadata = {
          title: title,
@@ -47,18 +52,21 @@ async function downloadImage(url, path) {
          intro: (chapter.intro || '').trim(),
          start_time: (chapter.start_time || '').trim(),
       };
-      let pages = chapter.ext[0].value.map(page => ({ url: page.url, name: page.name }));
+      let pages = chapter.ext[0].value.map(page => ({
+         url: page.url,
+         name: page.name,
+      }));
       let chapterDirPath = path.join(rootDirPath, title);
       fs.ensureDirSync(chapterDirPath);
       fs.writeFileSync(path.join(chapterDirPath, 'metadata.json'), JSON.stringify(metadata, null, 2));
       for (let a = 0; a < pages.length; a++) {
          let page = pages[a];
          let outputName = `${a}_${page.name}`
-         console.log(page.url + " => " + outputName)
+         console.log(page.url + " => " + outputName);
          await retry(
             downloadImage.bind(undefined, page.url, path.join(chapterDirPath, outputName)),
             2, 1000
          );
       }
    }
-})
+});
