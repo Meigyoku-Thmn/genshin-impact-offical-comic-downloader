@@ -7,9 +7,14 @@ I made this because the comic reader interface on the official website is shitty
 # How to use
 You have to have NodeJS installed on your computer. I will not go into details because this tool for now is intended for software developers.
 
+Open your command promnt and navigate to this tool's folder, install all dependencies:
+```
+npm i
+```
+
 I created 3 files: `main_cn.js`, `main_vi.js`, `main_en.js` which is to download Simplified Chinese version, Vietnamese version and English version respectively. You can make another file to download your desired version (which miHoYo has). The result would be stored in a folder called `output` in this tool's folder.
 
-Assuming you want to download the English version, you will use this command:
+Assuming you want to download the English version, use this command:
 ```
 node main_en
 ```
