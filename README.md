@@ -1,5 +1,6 @@
 # Genshin Impact offical comic downloader
 This tool can crawl every single page of the Genshin Impact comic from the Official Genshin website.
+I made this because the comic reader interface on the official website is shitty, on a pc you can't even zoom.
 
 ("offical" here is about the comic from miHoYo's genshin website, this tool is just... a tool and not related to miHoYo in any way).
 
