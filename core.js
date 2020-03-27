@@ -19,7 +19,7 @@ async function downloadImage(url, path) {
    });
 }
 
-module.exports = (async function (url, lang, rootDirPath) {
+module.exports = (async function ({ url, rootDirPath, chapterZeroTitle }) {
    rootDirPath = path.join("output", rootDirPath);
    let response = await axios.get(url);
    let $ = cheerio.load(response.data);
@@ -34,13 +34,7 @@ module.exports = (async function (url, lang, rootDirPath) {
       console.log(`\n=======\nChương ${i}:`);
       let chapter = chapters[i];
       if (i == 0) {
-         var title; (({
-            "zh-Hans": () => title = "第〇话 " + chapter.title,
-            "vi": () => title = "Chương 00: " + chapter.title,
-            "en": () => title = "Chapter 00: " + chapter.title,
-         })[lang] || (() => { }))();
-         if (title == null)
-            throw new Error(`lang "${lang}" is unknown.`);
+         var title = chapterZeroTitle
       }
       else title = chapter.title;
       if (title == null)
