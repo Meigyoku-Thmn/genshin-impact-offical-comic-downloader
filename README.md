@@ -12,9 +12,9 @@ Open your command promnt and navigate to this tool's folder, install all depende
 npm i
 ```
 
-I created 3 files: `main_cn.js`, `main_vi.js`, `main_en.js` which is to download Simplified Chinese version, Vietnamese version and English version respectively. You can make another file to download your desired version (which miHoYo has). The result would be stored in a folder called `output` in this tool's folder.
+I created a source.json file to download Japanese version (ja), Simplified Chinese version (cn), Vietnamese version (vi) and English version (en). You can add your config to that file to download your desired version (which miHoYo has). The result would be stored in a folder called `output` in this tool's folder.
 
 Assuming you want to download the English version, use this command:
 ```
-node main_en
+node main en
 ```
