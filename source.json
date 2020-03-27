@@ -1,0 +1,22 @@
+{
+   "vi": {
+      "url": "https://genshin.mihoyo.com/vi/manga",
+      "rootDirPath": "Genshin Impact (Vietnamese)",
+      "chapterZeroTitle": "Chương 00: "
+   },
+   "en": {
+      "url": "https://genshin.mihoyo.com/en/manga",
+      "rootDirPath": "Genshin Impact (English)",
+      "chapterZeroTitle": "Chapter 00: "
+   },
+   "ja": {
+      "url": "https://genshin.mihoyo.com/ja/manga",
+      "rootDirPath": "Genshin Impact (Japanese)",
+      "chapterZeroTitle": "第〇話－"
+   },
+   "cn": {
+      "url": "https://www.yuanshen.com/manga",
+      "rootDirPath": "Genshin Impact (Simplified Chinese)",
+      "chapterZeroTitle": "第〇话 "
+   }
+}

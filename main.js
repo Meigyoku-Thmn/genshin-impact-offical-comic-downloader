@@ -3,6 +3,9 @@ const cheerio = require('cheerio');
 const fs = require('fs-extra');
 const path = require('path');
 const retry = require('@beyonk/promise-retry');
+const source = require("./source.json")
+
+main(source[process.argv[2]]);
 
 // https://futurestud.io/tutorials/download-files-images-with-axios-in-node-js
 async function downloadImage(url, path) {
@@ -19,7 +22,7 @@ async function downloadImage(url, path) {
    });
 }
 
-module.exports = (async function ({ url, rootDirPath, chapterZeroTitle }) {
+async function main({ url, rootDirPath, chapterZeroTitle }) {
    rootDirPath = path.join("output", rootDirPath);
    let response = await axios.get(url);
    let $ = cheerio.load(response.data);
@@ -63,4 +66,4 @@ module.exports = (async function ({ url, rootDirPath, chapterZeroTitle }) {
          );
       }
    }
-});
+}
